@@ -1,0 +1,51 @@
+/* container for the buttons, always on top of screen in case of a longer game */
+.selection_container {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 32px;
+    background-color: lightblue;
+    position: sticky;
+    top: 0;
+}
+
+button#rock,  #paper, #scissors {
+    height: 36px;
+    width: auto;
+    font-size: 24px;
+    border-radius: 8px;
+    background-color: lightskyblue;
+    color: navy;
+    border-color: navy;
+}
+
+/* positioning for scoreboard */
+.scoreboard_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    background-color: lightblue;
+    position: sticky;
+    top: 0;
+    border-style: groove;
+    border-color: navy;
+}
+
+#scoreboard {
+    color: navy;
+    font-size: 24px;
+    display: flex;
+    margin: 0;
+}
+
+#score {
+    color: navy;
+    font-size: 24px;
+    margin: 12px;
+}
+
+#game {
+    color: navy;
+    font-size: 24px;
+    margin: 12px; 
+}

@@ -28,13 +28,22 @@ scissors.onclick = () => gameStart("scissors");
 
 const divResult = document.createElement("div");
 divResult.textContent = "Results: ";
+divResult.setAttribute('style', 'color: navy; font-size: 24px');
 document.body.appendChild(divResult);
 
-// create new text element for round results
+
+// create new text element for round results, color depinding of the score
 function roundResults(result) {
     const roundResults = document.createElement("p");
-    roundResults.textContent = result;
-    document.body.appendChild(roundResults);    
+    roundResults.textContent = result[1];
+    if (result[0] === 1) {
+        roundResults.style.color = "green";
+    } else if (result[0] === -1) {
+        roundResults.style.color = "red";
+    } else {
+        roundResults.style.color = "brown";
+    }
+    document.body.appendChild(roundResults);
 }
 
 // display score on scoreboard
@@ -42,12 +51,15 @@ function displayScore(score) {
     document.getElementById('score').innerHTML = score;
 }
 
-
+// display winner at scoreboard
 function winner(score) {
-    const pWinner = document.createElement("p");
-    pWinner.textContent = score;
-    document.body.appendChild(pWinner);
-    
+    const container = document.getElementsByClassName('scoreboard_container');
+    document.getElementById('score').innerHTML = score;
+    if (stats[0] > stats[1]) {
+        document.getElementById('score').style.backgroundColor="green";
+    } else {
+        document.getElementById('score').style.backgroundColor="red";
+    }
 }
 
 // Play one round of Rock Paper Scissors
@@ -82,9 +94,10 @@ function playRound(playerSelection, computerSelection) {
 
 // start a game, storing the score at stats[]
 function gameStart(playerSelection) {
+    document.getElementById('score').style.backgroundColor="lightblue"; //reset the score color when new game begins
     const result = playRound(playerSelection, computerSelection);
     console.log(result[1]);
-    roundResults(result[1]);
+    roundResults(result);
     if (result[0] === 1) {
         stats[0] ++;
         gameScore();
@@ -114,12 +127,10 @@ function endResults() {
     displayScore("Wins: " + stats[0] + " Losses: " + stats[1] + " Draws: " + stats[2]);
     if (stats[0] > stats[1]) {
         winner("Congratulations, you have won!");
-
-        return stats = [0, 0, 0]; //clears the score for the new game
     } else if (stats[0] < stats[1]) {
         winner("You have lost, better luck next time!");
-        return stats = [0, 0, 0]; //clears the score for the new game
     }
+    return stats = [0, 0, 0]; //clears the score for the new game
 }
 
 

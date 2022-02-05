@@ -14,7 +14,6 @@ let playerSelection;
 let computerSelection;
 let stats = [0, 0, 0];
 
-
 const rock = document.querySelector('#rock');
 rock.addEventListener('click', () => {
         gameStart("rock"); 
@@ -26,11 +25,11 @@ paper.onclick = () => gameStart("paper");
 const scissors = document.querySelector('#scissors');
 scissors.onclick = () => gameStart("scissors"); 
 
+//create div for results
 const divResult = document.createElement("div");
 divResult.textContent = "Results: ";
 divResult.setAttribute('style', 'color: navy; font-size: 24px');
 document.body.appendChild(divResult);
-
 
 // create new text element for round results, color depinding of the score
 function roundResults(result) {
@@ -51,16 +50,18 @@ function displayScore(score) {
     document.getElementById('score').innerHTML = score;
 }
 
-// display winner at scoreboard
+// display winner at scoreboard, give alert for instructions of starting a new game
 function winner(score) {
-    const container = document.getElementsByClassName('scoreboard_container');
     document.getElementById('score').innerHTML = score;
     if (stats[0] > stats[1]) {
         document.getElementById('score').style.backgroundColor="green";
+        alert("Congratulations, you have won! Try your luck again by starting a new game by seleting one of the plays 'Rock', 'Paper' or 'Scissors'");
     } else {
         document.getElementById('score').style.backgroundColor="red";
+        alert("You have lost, better luck next time! Try again bt starting a new game by seleting one of the plays 'Rock', 'Paper' or 'Scissors'");
     }
 }
+
 
 // Play one round of Rock Paper Scissors
 function playRound(playerSelection, computerSelection) {
@@ -96,7 +97,6 @@ function playRound(playerSelection, computerSelection) {
 function gameStart(playerSelection) {
     document.getElementById('score').style.backgroundColor="lightblue"; //reset the score color when new game begins
     const result = playRound(playerSelection, computerSelection);
-    console.log(result[1]);
     roundResults(result);
     if (result[0] === 1) {
         stats[0] ++;
